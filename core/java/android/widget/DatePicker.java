@@ -39,7 +39,6 @@ import android.widget.NumberPicker.OnValueChangeListener;
 
 import com.android.internal.R;
 
-import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -48,6 +47,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import libcore.icu.ICU;
+import libcore.icu.LocaleData;
 
 /**
  * This class is a widget for selecting a date. The date can be selected by a
@@ -481,7 +481,7 @@ public class DatePicker extends FrameLayout {
         mCurrentDate = getCalendarForLocale(mCurrentDate, locale);
 
         mNumberOfMonths = mTempDate.getActualMaximum(Calendar.MONTH) + 1;
-        mShortMonths = new DateFormatSymbols().getShortMonths();
+        mShortMonths = LocaleData.get(locale).shortStandAloneMonthNames;
 
         if (usingNumericMonths()) {
             // We're in a locale where a date should either be all-numeric, or all-text.
